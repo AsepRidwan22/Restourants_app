@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restouran_app/data/model/restaurant.dart';
+import 'package:restouran_app/cummon/style.dart';
 
 class RestaurantDetailPage extends StatelessWidget {
   static const routeName = '/restaurant_detail';
@@ -23,7 +24,7 @@ class RestaurantDetailPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -32,40 +33,24 @@ class RestaurantDetailPage extends StatelessWidget {
                         children: [
                           Text(
                             restaurant.name,
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
+                            style: myTextTheme.headline6,
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          _sizebox(10),
                           Row(
                             children: [
-                              Icon(
-                                Icons.location_on,
-                                size: 16,
-                              ),
-                              Text(
-                                '${restaurant.city}',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
+                              _icon(Icons.location_on, 16, Colors.grey),
+                              Text(restaurant.city,
+                                  style: myTextTheme.bodyText1),
                             ],
                           ),
                         ],
                       ),
                       Row(
                         children: [
-                          Icon(
-                            Icons.star_rate,
-                            size: 20,
-                            color: Colors.yellow,
-                          ),
+                          _icon(Icons.star_rate, 20, Colors.yellow),
                           Text(
                             ' ${restaurant.rating}',
-                            style: TextStyle(fontSize: 16),
+                            style: myTextTheme.headline6,
                           ),
                         ],
                       )
@@ -77,24 +62,16 @@ class RestaurantDetailPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.only(top: 10, right: 20, left: 20),
-                      child: Text(
-                        'Description',
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                      ),
+                      padding:
+                          const EdgeInsets.only(top: 10, right: 20, left: 20),
+                      child: Text('Description', style: myTextTheme.headline6),
                     ),
                     Container(
-                      padding: EdgeInsets.only(
-                          top: 10, right: 20, left: 20, bottom: 20),
-                      width: double.infinity,
-                      child: Text(
-                        restaurant.description,
-                        style: TextStyle(fontSize: 14, height: 1.2),
-                      ),
-                    ),
+                        padding: const EdgeInsets.only(
+                            top: 10, right: 20, left: 20, bottom: 20),
+                        width: double.infinity,
+                        child: Text(restaurant.description,
+                            style: myTextTheme.bodyText2)),
                   ],
                 ),
                 _barrierContent(),
@@ -103,20 +80,12 @@ class RestaurantDetailPage extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   child: Column(
                     children: [
-                      Container(
-                        child: Text(
-                          'Menu Food',
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
+                      Text('Menu Food', style: myTextTheme.headline6),
                       ListBody(
                         children: restaurant.menus.foods.map((food) {
                           return Text(
                             '- ${food.name}',
-                            style: TextStyle(fontSize: 14, height: 1.5),
+                            style: myTextTheme.bodyText2,
                           );
                         }).toList(),
                       ),
@@ -129,21 +98,12 @@ class RestaurantDetailPage extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   child: Column(
                     children: [
-                      Container(
-                        child: Text(
-                          'Menu Drink',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+                      Text('Menu Drink', style: myTextTheme.headline6),
                       ListBody(
                         children: restaurant.menus.drinks.map((drink) {
                           return Text(
                             '- ${drink.name}',
-                            style: TextStyle(fontSize: 14, height: 1.5),
+                            style: myTextTheme.bodyText2,
                           );
                         }).toList(),
                       ),
@@ -164,5 +124,19 @@ Widget _barrierContent() {
   return Container(
     height: 10,
     color: Colors.grey.shade200,
+  );
+}
+
+Widget _sizebox(double height) {
+  return SizedBox(
+    height: height,
+  );
+}
+
+Widget _icon(IconData icon, double size, Color color) {
+  return Icon(
+    icon,
+    size: size,
+    color: color,
   );
 }

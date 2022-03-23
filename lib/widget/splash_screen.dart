@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:restouran_app/main.dart';
+import 'package:restouran_app/ui/restaurant_list_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -23,25 +23,25 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   startTimer() async {
-    var duration = Duration(seconds: 3);
-    return new Timer(duration, route);
+    var duration = const Duration(seconds: 3);
+    return Timer(duration, route);
   }
 
   route() {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => RestaurantListPage(),
+          builder: (context) => const RestaurantListPage(),
         ));
   }
 
   initScreen(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF6CA8F1),
+      backgroundColor: const Color(0xFF6CA8F1),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: const <Widget>[
             Padding(padding: EdgeInsets.only(top: 20.0)),
             Text(
               "Please Wait",
