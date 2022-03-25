@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restouran_app/data/model/restaurant.dart';
+import 'package:restouran_app/data/model/restaurant_list.dart';
 import 'package:restouran_app/cummon/style.dart';
 
 class RestaurantDetailPage extends StatelessWidget {
@@ -81,14 +81,14 @@ class RestaurantDetailPage extends StatelessWidget {
                   child: Column(
                     children: [
                       Text('Menu Food', style: myTextTheme.headline6),
-                      ListBody(
-                        children: restaurant.menus.foods.map((food) {
-                          return Text(
-                            '- ${food.name}',
-                            style: myTextTheme.bodyText2,
-                          );
-                        }).toList(),
-                      ),
+                      // ListBody(
+                      //   children: restaurant.menus.foods.map((food) {
+                      //     return Text(
+                      //       '- ${food.name}',
+                      //       style: myTextTheme.bodyText2,
+                      //     );
+                      //   }).toList(),
+                      // ),
                     ],
                   ),
                 ),
@@ -99,14 +99,14 @@ class RestaurantDetailPage extends StatelessWidget {
                   child: Column(
                     children: [
                       Text('Menu Drink', style: myTextTheme.headline6),
-                      ListBody(
-                        children: restaurant.menus.drinks.map((drink) {
-                          return Text(
-                            '- ${drink.name}',
-                            style: myTextTheme.bodyText2,
-                          );
-                        }).toList(),
-                      ),
+                      // ListBody(
+                      //   children: restaurant.menus.drinks.map((drink) {
+                      //     return Text(
+                      //       '- ${drink.name}',
+                      //       style: myTextTheme.bodyText2,
+                      //     );
+                      //   }).toList(),
+                      // ),
                     ],
                   ),
                 ),
