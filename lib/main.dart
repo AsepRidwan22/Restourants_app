@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:restouran_app/data/model/restaurant_list.dart';
+import 'package:restouran_app/data/model/restaurant_detail.dart';
 import 'package:restouran_app/menu/detail_page.dart';
+import 'package:restouran_app/ui/restaurant_detail_page.dart';
 import 'package:restouran_app/widget/splash_screen.dart';
 import 'package:restouran_app/ui/restaurant_home_page.dart';
+import 'package:restouran_app/cummon/navigations.dart';
+import 'dart:ui';
 
 void main() {
   runApp(const MyApp());
@@ -22,10 +25,9 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity),
       initialRoute: RestaurantListPage.routeName,
       routes: {
-        RestaurantListPage.routeName: (context) => const RestaurantListPage(),
+        RestaurantListPage.routeName: (context) => RestaurantListPage(),
         RestaurantDetailPage.routeName: (context) => RestaurantDetailPage(
-              restaurant:
-                  ModalRoute.of(context)?.settings.arguments as Restaurant,
+              id_resto: ModalRoute.of(context)?.settings.arguments as String,
             ),
       },
     );

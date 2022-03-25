@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:restouran_app/data/model/restaurant_list.dart';
+import 'package:restouran_app/data/model/restaurant_detail.dart';
 import 'package:restouran_app/cummon/style.dart';
 
-class RestaurantDetailPage extends StatelessWidget {
+class RestaurantDetail extends StatelessWidget {
   static const routeName = '/restaurant_detail';
   final Restaurant restaurant;
 
-  const RestaurantDetailPage({required this.restaurant});
+  const RestaurantDetail({required this.restaurant});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,8 @@ class RestaurantDetailPage extends StatelessWidget {
             Hero(
               tag: restaurant.pictureId,
               child: Image.network(
-                restaurant.pictureId,
+                "https://restaurant-api.dicoding.dev/images/small/" +
+                    restaurant.pictureId,
               ),
             ),
             Column(
@@ -81,14 +82,14 @@ class RestaurantDetailPage extends StatelessWidget {
                   child: Column(
                     children: [
                       Text('Menu Food', style: myTextTheme.headline6),
-                      // ListBody(
-                      //   children: restaurant.menus.foods.map((food) {
-                      //     return Text(
-                      //       '- ${food.name}',
-                      //       style: myTextTheme.bodyText2,
-                      //     );
-                      //   }).toList(),
-                      // ),
+                      ListBody(
+                        children: restaurant.menus.foods.map((food) {
+                          return Text(
+                            '- ${food.name}',
+                            style: myTextTheme.bodyText2,
+                          );
+                        }).toList(),
+                      ),
                     ],
                   ),
                 ),
@@ -99,14 +100,14 @@ class RestaurantDetailPage extends StatelessWidget {
                   child: Column(
                     children: [
                       Text('Menu Drink', style: myTextTheme.headline6),
-                      // ListBody(
-                      //   children: restaurant.menus.drinks.map((drink) {
-                      //     return Text(
-                      //       '- ${drink.name}',
-                      //       style: myTextTheme.bodyText2,
-                      //     );
-                      //   }).toList(),
-                      // ),
+                      ListBody(
+                        children: restaurant.menus.drinks.map((drink) {
+                          return Text(
+                            '- ${drink.name}',
+                            style: myTextTheme.bodyText2,
+                          );
+                        }).toList(),
+                      ),
                     ],
                   ),
                 ),

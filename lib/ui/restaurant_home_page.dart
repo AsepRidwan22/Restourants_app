@@ -4,14 +4,12 @@ import 'package:restouran_app/data/model/restaurant_list.dart';
 import 'package:restouran_app/menu/detail_page.dart';
 import 'package:restouran_app/cummon/style.dart';
 import 'package:provider/provider.dart';
-import 'package:restouran_app/provider/restaurant.dart';
+import 'package:restouran_app/provider/restaurant_list.dart';
 import 'package:restouran_app/widget/list_card_restaurant.dart';
 import 'package:restouran_app/data/api/service_api.dart';
 
 class RestaurantListPage extends StatelessWidget {
-  static const routeName = '/restauran_home';
-
-  const RestaurantListPage({Key? key}) : super(key: key);
+  static const routeName = '/restauran_list';
 
   @override
   Widget build(BuildContext context) {

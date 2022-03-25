@@ -3,6 +3,8 @@ import 'package:restouran_app/data/model/restaurant_list.dart';
 import 'package:restouran_app/ui/restaurant_home_page.dart';
 import 'package:restouran_app/cummon/style.dart';
 import 'package:restouran_app/menu/detail_page.dart';
+import 'package:restouran_app/ui/restaurant_detail_page.dart';
+import 'package:restouran_app/cummon/navigations.dart';
 
 class CardRestaurant extends StatelessWidget {
   final Restaurant restaurant;
@@ -13,8 +15,7 @@ class CardRestaurant extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, RestaurantDetailPage.routeName,
-            arguments: restaurant);
+        Navigation.intentWithData(RestaurantDetailPage.routeName, restaurant);
       },
       child: Stack(
         children: <Widget>[
