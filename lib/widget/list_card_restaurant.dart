@@ -15,7 +15,9 @@ class CardRestaurant extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigation.intentWithData(RestaurantDetailPage.routeName, restaurant);
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return RestaurantDetailPage(id_resto: restaurant.id);
+        }));
       },
       child: Stack(
         children: <Widget>[
