@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:restouran_app/data/model/restaurant_detail.dart';
-import 'package:restouran_app/widget/detail_page.dart';
+import 'package:restouran_app/widget/restaurant_detail.dart';
 import 'package:restouran_app/ui/restaurant_detail_page.dart';
 import 'package:restouran_app/widget/splash_screen.dart';
-import 'package:restouran_app/ui/restaurant_home_page.dart';
+import 'package:restouran_app/ui/restaurant_list_page.dart';
 import 'package:restouran_app/cummon/navigations.dart';
 import 'dart:ui';
 
