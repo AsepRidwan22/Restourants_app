@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:restouran_app/data/model/restaurant_list.dart';
 import 'package:restouran_app/ui/restaurant_home_page.dart';
 import 'package:restouran_app/cummon/style.dart';
-import 'package:restouran_app/menu/detail_page.dart';
+import 'package:restouran_app/widget/detail_page.dart';
 import 'package:restouran_app/ui/restaurant_detail_page.dart';
 import 'package:restouran_app/cummon/navigations.dart';
 

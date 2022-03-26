@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:restouran_app/data/model/restaurant_list.dart';
-import 'package:restouran_app/menu/detail_page.dart';
+import 'package:restouran_app/widget/bottom_navbar.dart';
+import 'package:restouran_app/widget/detail_page.dart';
 import 'package:restouran_app/cummon/style.dart';
 import 'package:provider/provider.dart';
 import 'package:restouran_app/provider/restaurant_list.dart';
@@ -48,6 +49,7 @@ class RestaurantListPage extends StatelessWidget {
           },
         ),
       ),
+      // bottomNavigationBar: BottomNavBar(),
     );
   }
 }

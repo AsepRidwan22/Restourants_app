@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:restouran_app/data/model/restaurant_detail.dart';
-import 'package:restouran_app/menu/detail_page.dart';
+import 'package:restouran_app/widget/detail_page.dart';
 import 'package:restouran_app/cummon/style.dart';
 import 'package:provider/provider.dart';
 import 'package:restouran_app/provider/restaurant_detail.dart';
@@ -18,9 +18,9 @@ class RestaurantDetailPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
+        foregroundColor: Colors.black,
         title: const Text(
           "Restaurant App",
-          style: TextStyle(color: Colors.black),
         ),
       ),
       backgroundColor: Colors.grey.shade100,

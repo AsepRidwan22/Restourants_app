@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restouran_app/data/model/restaurant_detail.dart';
-import 'package:restouran_app/menu/detail_page.dart';
+import 'package:restouran_app/widget/detail_page.dart';
 import 'package:restouran_app/ui/restaurant_detail_page.dart';
 import 'package:restouran_app/widget/splash_screen.dart';
 import 'package:restouran_app/ui/restaurant_home_page.dart';
@@ -14,8 +14,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,8 +21,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity),
-      initialRoute: RestaurantListPage.routeName,
+      initialRoute: SplashScreen.routeName,
       routes: {
+        SplashScreen.routeName: (context) => SplashScreen(),
         RestaurantListPage.routeName: (context) => RestaurantListPage(),
       },
     );
