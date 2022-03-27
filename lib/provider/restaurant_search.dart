@@ -1,45 +1,51 @@
 import 'dart:async';
-
 import 'package:restouran_app/data/api/search_service_api.dart';
-import 'package:restouran_app/data/model/restaurant_list.dart';
+import 'package:restouran_app/data/model/restaurant_search.dart';
 import 'package:flutter/material.dart';
 
-enum ResultState { Loading, NoData, HasData, Error }
+enum SearchResultState { Loading, NoData, HasData, Error }
 
-class RestaurantProvider extends ChangeNotifier {
+class SearchRestaurantProvider extends ChangeNotifier {
   final SearchApiService apiService;
-  final String search;
 
-  RestaurantProvider({required this.apiService, required this.search}) {
-    _fetchAllRestaurant(search);
+  SearchRestaurantProvider({required this.apiService}) {
+    fetchAllRestaurant(search);
   }
 
-  late RestaurantResult _restaurantResult;
-  late ResultState _state;
+  SearchRestaurantResult? _restaurantResult;
+  SearchResultState? _state;
   String _message = '';
+  String _search = '';
 
   String get message => _message;
 
-  RestaurantResult get result => _restaurantResult;
+  SearchRestaurantResult? get result => _restaurantResult;
 
-  ResultState get state => _state;
+  String get search => _search;
 
-  Future<dynamic> _fetchAllRestaurant(String search) async {
+  SearchResultState? get state => _state;
+
+  Future<dynamic> fetchAllRestaurant(String search) async {
     try {
-      _state = ResultState.Loading;
-      notifyListeners();
-      final restaurant = await apiService.getTextField(search);
-      if (restaurant.restaurants.isEmpty) {
-        _state = ResultState.NoData;
+      if (search.isNotEmpty) {
+        _state = SearchResultState.Loading;
+        _search = search;
         notifyListeners();
-        return _message = 'Empty Data';
+        final restaurant = await apiService.getTextField(search);
+        if (restaurant.restaurants.isEmpty) {
+          _state = SearchResultState.NoData;
+          notifyListeners();
+          return _message = 'Empty Data';
+        } else {
+          _state = SearchResultState.HasData;
+          notifyListeners();
+          return _restaurantResult = restaurant;
+        }
       } else {
-        _state = ResultState.HasData;
-        notifyListeners();
-        return _restaurantResult = restaurant;
+        return _message = 'text null';
       }
     } catch (e) {
-      _state = ResultState.Error;
+      _state = SearchResultState.Error;
       notifyListeners();
       return _message = 'Error --> $e';
     }

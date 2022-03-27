@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restouran_app/ui/restaurant_list_page.dart';
 import 'package:restouran_app/widget/splash_screen.dart';
+import 'package:restouran_app/ui/restaurant_search_page.dart';
 
 class RestaurantHomePage extends StatefulWidget {
   const RestaurantHomePage({Key? key}) : super(key: key);
@@ -15,12 +16,7 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
     RestaurantListPage(),
-    Center(
-      child: Text(
-        'Profil',
-        style: optionStyle,
-      ),
-    ),
+    RestaurantSearchPage(),
     Center(
       child: Text(
         'Profil',
