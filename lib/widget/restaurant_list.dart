@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:restouran_app/data/model/restaurant_list.dart';
-import 'package:restouran_app/ui/restaurant_list_page.dart';
 import 'package:restouran_app/cummon/style.dart';
-import 'package:restouran_app/widget/restaurant_detail.dart';
 import 'package:restouran_app/ui/restaurant_detail_page.dart';
-import 'package:restouran_app/cummon/navigations.dart';
 
 class CardRestaurant extends StatelessWidget {
   final Restaurant restaurant;
 
-  const CardRestaurant({required this.restaurant});
+  const CardRestaurant({Key? key, required this.restaurant}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return RestaurantDetailPage(id_resto: restaurant.id);
+          return RestaurantDetailPage(idResto: restaurant.id);
         }));
       },
       child: Stack(

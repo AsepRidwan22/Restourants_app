@@ -6,7 +6,8 @@ class RestaurantDetail extends StatelessWidget {
   static const routeName = '/restaurant_detail';
   final Restaurant restaurant;
 
-  const RestaurantDetail({required this.restaurant});
+  const RestaurantDetail({Key? key, required this.restaurant})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class RestaurantDetail extends StatelessWidget {
                           Row(
                             children: [
                               _icon(Icons.location_on, 20, Colors.grey),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Column(
@@ -157,17 +158,17 @@ class RestaurantDetail extends StatelessWidget {
                                 Container(
                                   width: 40,
                                   height: 40,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: Colors.blue),
                                   child: Center(
                                       child: Text(
                                     review.name.characters.elementAt(0),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.white, fontSize: 20),
                                   )),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 15,
                                 ),
                                 Column(
@@ -177,7 +178,7 @@ class RestaurantDetail extends StatelessWidget {
                                       children: [
                                         Text(
                                           review.name,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold),
                                         ),

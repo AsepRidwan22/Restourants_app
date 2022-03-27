@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:restouran_app/data/model/restaurant_search.dart';
 
 class SearchApiService {
-  static final String _baseUrl = 'https://restaurant-api.dicoding.dev/';
+  static const String _baseUrl = 'https://restaurant-api.dicoding.dev/';
 
   Future<SearchRestaurantResult> getTextField(String query) async {
     final response = await http.get(Uri.parse(_baseUrl + "search?q=$query"));

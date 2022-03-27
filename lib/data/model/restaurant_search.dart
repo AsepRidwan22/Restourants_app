@@ -4,10 +4,10 @@
 
 import 'dart:convert';
 
-SearchRestaurantResult SearchRestaurantResultFromJson(String str) =>
+SearchRestaurantResult searchRestaurantResultFromJson(String str) =>
     SearchRestaurantResult.fromJson(json.decode(str));
 
-String SearchRestaurantResultToJson(SearchRestaurantResult data) =>
+String searchRestaurantResultToJson(SearchRestaurantResult data) =>
     json.encode(data.toJson());
 
 class SearchRestaurantResult {

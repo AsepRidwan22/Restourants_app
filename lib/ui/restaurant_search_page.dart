@@ -1,16 +1,11 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:restouran_app/cummon/style.dart';
 import 'package:provider/provider.dart';
 import 'package:restouran_app/data/api/search_service_api.dart';
-import 'package:restouran_app/data/model/restaurant_list.dart';
-import 'package:restouran_app/provider/restaurant_list.dart';
-import 'package:restouran_app/data/api/service_api.dart';
 import 'package:restouran_app/provider/restaurant_search.dart';
 import 'package:restouran_app/widget/card_search.dart';
-import 'package:restouran_app/widget/restaurant_list.dart';
 
 class RestaurantSearchPage extends StatefulWidget {
+  const RestaurantSearchPage({Key? key}) : super(key: key);
   @override
   State<RestaurantSearchPage> createState() => _RestaurantSearchPageState();
 }
@@ -32,14 +27,14 @@ class _RestaurantSearchPageState extends State<RestaurantSearchPage> {
                 Positioned(
                   child: Container(
                     alignment: Alignment.center,
-                    margin: EdgeInsets.all(15.0),
-                    padding: EdgeInsets.only(left: 20, right: 10),
+                    margin: const EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.only(left: 20, right: 10),
                     decoration: BoxDecoration(
                         color: Colors.grey.shade100,
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
-                              offset: Offset(0, 10),
+                              offset: const Offset(0, 10),
                               blurRadius: 50,
                               color: Colors.grey.shade500.withOpacity(0.23))
                         ]),
@@ -69,16 +64,17 @@ class _RestaurantSearchPageState extends State<RestaurantSearchPage> {
                   ),
                 ),
                 (hasil.isEmpty)
-                    ? Center(
+                    ? const Center(
                         child: Text('Tuliskan apa yang ingin dicari!'),
                       )
                     : Consumer<SearchRestaurantProvider>(
                         builder: (context, state, _) {
-                          if (state.state == SearchResultState.Loading) {
-                            return Center(child: CircularProgressIndicator());
-                          } else if (state.state == SearchResultState.HasData) {
+                          if (state.state == SearchResultState.loading) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          } else if (state.state == SearchResultState.hasData) {
                             return ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemCount: state.result!.restaurants.length,
                               itemBuilder: (context, index) {
@@ -87,12 +83,12 @@ class _RestaurantSearchPageState extends State<RestaurantSearchPage> {
                                 return CardSearch(restaurant: restaurant);
                               },
                             );
-                          } else if (state.state == SearchResultState.NoData) {
+                          } else if (state.state == SearchResultState.noData) {
                             return Center(child: Text(state.message));
-                          } else if (state.state == SearchResultState.Error) {
+                          } else if (state.state == SearchResultState.error) {
                             return Center(child: Text(state.message));
                           } else {
-                            return Center(child: Text(''));
+                            return const Center(child: Text(''));
                           }
                         },
                       ),

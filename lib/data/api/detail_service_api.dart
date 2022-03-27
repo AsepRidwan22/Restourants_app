@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:restouran_app/data/model/restaurant_list.dart';
 import 'package:restouran_app/data/model/restaurant_detail.dart';
 
 class DetailApiService {
-  static final String _baseUrl = 'https://restaurant-api.dicoding.dev/';
-  static final String _category = 'detail/';
+  static const String _baseUrl = 'https://restaurant-api.dicoding.dev/';
+  static const String _category = 'detail/';
 
   Future<DetailRestaurantResult> getDetailId(String id) async {
     final response = await http.get(Uri.parse(_baseUrl + _category + id));

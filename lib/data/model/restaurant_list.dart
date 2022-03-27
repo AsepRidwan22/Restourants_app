@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-RestaurantResult RestaurantResultFromJson(String str) =>
+RestaurantResult restaurantResultFromJson(String str) =>
     RestaurantResult.fromJson(json.decode(str));
 
-String RestaurantResultToJson(RestaurantResult data) =>
+String restaurantResultToJson(RestaurantResult data) =>
     json.encode(data.toJson());
 
 class RestaurantResult {
