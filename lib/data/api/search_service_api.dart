@@ -6,7 +6,7 @@ class SearchApiService {
   static final String _baseUrl = 'https://restaurant-api.dicoding.dev/';
 
   Future<SearchRestaurantResult> getTextField(String query) async {
-    final response = await http.get(Uri.parse(_baseUrl + "/search?q=$query"));
+    final response = await http.get(Uri.parse(_baseUrl + "search?q=$query"));
     if (response.statusCode == 200) {
       return SearchRestaurantResult.fromJson(json.decode(response.body));
     } else {

@@ -68,29 +68,34 @@ class _RestaurantSearchPageState extends State<RestaurantSearchPage> {
                     ),
                   ),
                 ),
-                Consumer<SearchRestaurantProvider>(
-                  builder: (context, state, _) {
-                    if (state.state == SearchResultState.Loading) {
-                      return Center(child: CircularProgressIndicator());
-                    } else if (state.state == SearchResultState.HasData) {
-                      return ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: state.result!.restaurants.length,
-                        itemBuilder: (context, index) {
-                          var restaurant = state.result!.restaurants[index];
-                          return CardSearch(restaurant: restaurant);
+                (hasil.isEmpty)
+                    ? Center(
+                        child: Text('Tuliskan apa yang ingin dicari!'),
+                      )
+                    : Consumer<SearchRestaurantProvider>(
+                        builder: (context, state, _) {
+                          if (state.state == SearchResultState.Loading) {
+                            return Center(child: CircularProgressIndicator());
+                          } else if (state.state == SearchResultState.HasData) {
+                            return ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: state.result!.restaurants.length,
+                              itemBuilder: (context, index) {
+                                var restaurant =
+                                    state.result!.restaurants[index];
+                                return CardSearch(restaurant: restaurant);
+                              },
+                            );
+                          } else if (state.state == SearchResultState.NoData) {
+                            return Center(child: Text(state.message));
+                          } else if (state.state == SearchResultState.Error) {
+                            return Center(child: Text(state.message));
+                          } else {
+                            return Center(child: Text(''));
+                          }
                         },
-                      );
-                    } else if (state.state == SearchResultState.NoData) {
-                      return Center(child: Text(state.message));
-                    } else if (state.state == SearchResultState.Error) {
-                      return Center(child: Text(state.message));
-                    } else {
-                      return Center(child: Text(''));
-                    }
-                  },
-                ),
+                      ),
               ],
             ),
           ),
