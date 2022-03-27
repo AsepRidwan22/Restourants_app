@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:restouran_app/data/api/search_service_api.dart';
 import 'package:restouran_app/data/model/restaurant_search.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,7 @@ class SearchRestaurantProvider extends ChangeNotifier {
         if (restaurant.restaurants.isEmpty) {
           _state = SearchResultState.noData;
           notifyListeners();
-          return _message = 'Empty Data';
+          return _message = 'Empty Data Boss!';
         } else {
           _state = SearchResultState.hasData;
           notifyListeners();
@@ -44,6 +45,8 @@ class SearchRestaurantProvider extends ChangeNotifier {
       } else {
         return _message = 'text null';
       }
+    } on SocketException {
+      throw Exception('not connection');
     } catch (e) {
       _state = SearchResultState.error;
       notifyListeners();

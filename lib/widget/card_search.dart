@@ -19,7 +19,6 @@ class CardSearch extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           Container(
-            //mohon maaf tidak mengunakan sizebox seperti yang di sarankan di submission sebelumnya karena sizebox tidak bisa pake margin
             margin:
                 const EdgeInsets.only(left: 40, top: 5, right: 20, bottom: 5),
             height: 170.0,

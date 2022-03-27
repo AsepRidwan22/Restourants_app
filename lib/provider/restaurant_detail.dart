@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:restouran_app/data/api/detail_service_api.dart';
 import 'package:restouran_app/data/model/restaurant_detail.dart';
@@ -36,6 +37,8 @@ class DetailRestaurantProvider extends ChangeNotifier {
         notifyListeners();
         return _detailRestaurant = detailRestaurant;
       }
+    } on SocketException {
+      throw Exception('not connection');
     } catch (e) {
       _state = DetailResultState.error;
       notifyListeners();
