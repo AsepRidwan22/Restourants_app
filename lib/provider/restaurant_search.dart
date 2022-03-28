@@ -46,7 +46,9 @@ class SearchRestaurantProvider extends ChangeNotifier {
         return _message = 'text null';
       }
     } on SocketException {
-      throw Exception('not connection');
+      _state = SearchResultState.error;
+      notifyListeners();
+      return _message = "non connection";
     } catch (e) {
       _state = SearchResultState.error;
       notifyListeners();
