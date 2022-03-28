@@ -39,7 +39,9 @@ class RestaurantProvider extends ChangeNotifier {
         return _restaurantResult = restaurant;
       }
     } on SocketException {
-      throw Exception('not connection');
+      _state = ResultState.error;
+      notifyListeners();
+      return _message = "non connection";
     } catch (e) {
       _state = ResultState.error;
       notifyListeners();
