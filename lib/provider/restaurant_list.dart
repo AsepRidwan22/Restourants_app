@@ -40,7 +40,8 @@ class RestaurantProvider extends ChangeNotifier {
     } on SocketException {
       _state = ResultState.error;
       notifyListeners();
-      return _message = "non connection";
+      return _message =
+          "terjadi kesalahan saat menghubungkan, silahkan cek koneksi anda";
     } catch (e) {
       _state = ResultState.error;
       notifyListeners();

@@ -39,7 +39,8 @@ class DetailRestaurantProvider extends ChangeNotifier {
     } on SocketException {
       _state = ResultState.error;
       notifyListeners();
-      return _message = "non connection";
+      return _message =
+          "Terjadi kesalahan saat menghubungkan, silahkan cek koneksi anda!!";
     } catch (e) {
       _state = ResultState.error;
       notifyListeners();
