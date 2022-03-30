@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:restouran_app/widget/restaurant_detail.dart';
 import 'package:provider/provider.dart';
 import 'package:restouran_app/provider/restaurant_detail.dart';
-import 'package:restouran_app/data/api/detail_service_api.dart';
+import 'package:restouran_app/data/api/service_api.dart';
+import 'package:restouran_app/cummon/constant.dart';
 
 class RestaurantDetailPage extends StatelessWidget {
   static const routeName = '/restauran_detail';
@@ -23,20 +24,20 @@ class RestaurantDetailPage extends StatelessWidget {
       ),
       backgroundColor: Colors.grey.shade100,
       body: ChangeNotifierProvider<DetailRestaurantProvider>(
-        create: (_) => DetailRestaurantProvider(
-            apiService: DetailApiService(), id: idResto),
+        create: (_) =>
+            DetailRestaurantProvider(apiService: ApiService(), id: idResto),
         child: Consumer<DetailRestaurantProvider>(
           builder: (context, state, _) {
-            if (state.state == DetailResultState.loading) {
+            if (state.state == ResultState.loading) {
               return const Center(child: CircularProgressIndicator());
-            } else if (state.state == DetailResultState.hasData) {
+            } else if (state.state == ResultState.hasData) {
               final restaurants = state.result.restaurants;
               return RestaurantDetail(
                 restaurant: restaurants,
               );
-            } else if (state.state == DetailResultState.noData) {
+            } else if (state.state == ResultState.noData) {
               return Center(child: Text(state.message));
-            } else if (state.state == DetailResultState.error) {
+            } else if (state.state == ResultState.error) {
               return Center(child: Text(state.message));
             } else {
               return const Center(child: Text(''));

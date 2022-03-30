@@ -1,20 +1,19 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:restouran_app/data/api/search_service_api.dart';
+import 'package:restouran_app/data/api/service_api.dart';
 import 'package:restouran_app/data/model/restaurant_search.dart';
 import 'package:flutter/material.dart';
-
-enum SearchResultState { loading, noData, hasData, error }
+import 'package:restouran_app/cummon/constant.dart';
 
 class SearchRestaurantProvider extends ChangeNotifier {
-  final SearchApiService apiService;
+  final ApiService apiService;
 
   SearchRestaurantProvider({required this.apiService}) {
     fetchAllRestaurant(search);
   }
 
   SearchRestaurantResult? _restaurantResult;
-  SearchResultState? _state;
+  ResultState? _state;
   String _message = '';
   String _search = '';
 
@@ -24,21 +23,21 @@ class SearchRestaurantProvider extends ChangeNotifier {
 
   String get search => _search;
 
-  SearchResultState? get state => _state;
+  ResultState? get state => _state;
 
   Future<dynamic> fetchAllRestaurant(String search) async {
     try {
       if (search.isNotEmpty) {
-        _state = SearchResultState.loading;
+        _state = ResultState.loading;
         _search = search;
         notifyListeners();
         final restaurant = await apiService.getTextField(search);
         if (restaurant.restaurants.isEmpty) {
-          _state = SearchResultState.noData;
+          _state = ResultState.noData;
           notifyListeners();
           return _message = 'Empty Data Boss!';
         } else {
-          _state = SearchResultState.hasData;
+          _state = ResultState.hasData;
           notifyListeners();
           return _restaurantResult = restaurant;
         }
@@ -46,11 +45,11 @@ class SearchRestaurantProvider extends ChangeNotifier {
         return _message = 'text null';
       }
     } on SocketException {
-      _state = SearchResultState.error;
+      _state = ResultState.error;
       notifyListeners();
       return _message = "non connection";
     } catch (e) {
-      _state = SearchResultState.error;
+      _state = ResultState.error;
       notifyListeners();
       return _message = 'Error --> $e';
     }

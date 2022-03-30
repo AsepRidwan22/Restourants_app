@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restouran_app/data/api/search_service_api.dart';
+import 'package:restouran_app/data/api/service_api.dart';
 import 'package:restouran_app/provider/restaurant_search.dart';
 import 'package:restouran_app/widget/card_search.dart';
+import 'package:restouran_app/cummon/constant.dart';
 
 class RestaurantSearchPage extends StatefulWidget {
   const RestaurantSearchPage({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class _RestaurantSearchPageState extends State<RestaurantSearchPage> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SearchRestaurantProvider>(
-      create: (_) => SearchRestaurantProvider(apiService: SearchApiService()),
+      create: (_) => SearchRestaurantProvider(apiService: ApiService()),
       child: Consumer<SearchRestaurantProvider>(builder: (context, state, _) {
         return Scaffold(
           backgroundColor: Colors.grey.shade100,
@@ -69,10 +70,10 @@ class _RestaurantSearchPageState extends State<RestaurantSearchPage> {
                       )
                     : Consumer<SearchRestaurantProvider>(
                         builder: (context, state, _) {
-                          if (state.state == SearchResultState.loading) {
+                          if (state.state == ResultState.loading) {
                             return const Center(
                                 child: CircularProgressIndicator());
-                          } else if (state.state == SearchResultState.hasData) {
+                          } else if (state.state == ResultState.hasData) {
                             return ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
@@ -83,9 +84,9 @@ class _RestaurantSearchPageState extends State<RestaurantSearchPage> {
                                 return CardSearch(restaurant: restaurant);
                               },
                             );
-                          } else if (state.state == SearchResultState.noData) {
+                          } else if (state.state == ResultState.noData) {
                             return Center(child: Text(state.message));
-                          } else if (state.state == SearchResultState.error) {
+                          } else if (state.state == ResultState.error) {
                             return Center(child: Text(state.message));
                           } else {
                             return const Center(child: Text(''));
