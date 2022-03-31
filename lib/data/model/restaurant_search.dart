@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:restouran_app/ui/restaurant_search_page.dart';
+
 SearchRestaurantResult searchRestaurantResultFromJson(String str) =>
     SearchRestaurantResult.fromJson(json.decode(str));
 
@@ -19,14 +21,14 @@ class SearchRestaurantResult {
 
   bool error;
   int founded;
-  List<Restaurant> restaurants;
+  List<RestaurantSearch> restaurants;
 
   factory SearchRestaurantResult.fromJson(Map<String, dynamic> json) =>
       SearchRestaurantResult(
         error: json["error"],
         founded: json["founded"],
-        restaurants: List<Restaurant>.from(
-            json["restaurants"].map((x) => Restaurant.fromJson(x))),
+        restaurants: List<RestaurantSearch>.from(
+            json["restaurants"].map((x) => RestaurantSearch.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -36,8 +38,8 @@ class SearchRestaurantResult {
       };
 }
 
-class Restaurant {
-  Restaurant({
+class RestaurantSearch {
+  RestaurantSearch({
     required this.id,
     required this.name,
     required this.description,
@@ -53,14 +55,14 @@ class Restaurant {
   String city;
   double rating;
 
-  factory Restaurant.fromJson(Map<String, dynamic> json) => Restaurant(
-        id: json["id"],
-        name: json["name"],
-        description: json["description"],
-        pictureId: json["pictureId"],
-        city: json["city"],
-        rating: json["rating"].toDouble(),
-      );
+  factory RestaurantSearch.fromJson(Map<String, dynamic> json) =>
+      RestaurantSearch(
+          id: json["id"],
+          name: json["name"],
+          description: json["description"],
+          pictureId: json["pictureId"],
+          city: json["city"],
+          rating: double.parse(json["rating"].toString()));
 
   Map<String, dynamic> toJson() => {
         "id": id,

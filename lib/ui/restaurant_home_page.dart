@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restouran_app/ui/restaurant_favorite.dart';
 import 'package:restouran_app/ui/restaurant_list_page.dart';
 import 'package:restouran_app/ui/restaurant_search_page.dart';
 
@@ -16,12 +17,7 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
   final List<Widget> _widgetOptions = <Widget>[
     const RestaurantListPage(),
     const RestaurantSearchPage(),
-    const Center(
-      child: Text(
-        'Profil',
-        style: optionStyle,
-      ),
-    ),
+    const RestaurantFavoritePage(),
     const Center(
       child: Text(
         'Profil',

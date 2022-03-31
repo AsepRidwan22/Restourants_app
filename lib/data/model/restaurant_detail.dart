@@ -63,7 +63,7 @@ class Restaurant {
         city: json["city"],
         address: json["address"],
         pictureId: json["pictureId"],
-        rating: json["rating"].toDouble(),
+        rating: double.parse(json["rating"].toString()),
         categories: List<Category>.from(
             json["categories"].map((x) => Category.fromJson(x))),
         menus: Menus.fromJson(json["menus"]),

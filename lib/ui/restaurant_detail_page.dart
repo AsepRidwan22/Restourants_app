@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restouran_app/data/model/restaurant_list.dart';
 import 'package:restouran_app/widget/restaurant_detail.dart';
 import 'package:provider/provider.dart';
 import 'package:restouran_app/provider/restaurant_detail.dart';
@@ -8,7 +9,10 @@ import 'package:restouran_app/cummon/constant.dart';
 class RestaurantDetailPage extends StatelessWidget {
   static const routeName = '/restauran_detail';
   final String idResto;
-  const RestaurantDetailPage({Key? key, required this.idResto})
+  final Restaurantlist? restaurantlist;
+
+  const RestaurantDetailPage(
+      {Key? key, required this.idResto, this.restaurantlist})
       : super(key: key);
 
   @override
@@ -31,9 +35,9 @@ class RestaurantDetailPage extends StatelessWidget {
             if (state.state == ResultState.loading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state.state == ResultState.hasData) {
-              final restaurants = state.result.restaurants;
               return RestaurantDetail(
-                restaurant: restaurants,
+                restaurant: state.result.restaurants,
+                restaurantlist: restaurantlist!,
               );
             } else if (state.state == ResultState.noData) {
               return Center(child: Text(state.message));

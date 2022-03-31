@@ -17,15 +17,15 @@ class RestaurantResult {
   bool error;
   String message;
   int count;
-  List<Restaurant> restaurants;
+  List<Restaurantlist> restaurants;
 
   factory RestaurantResult.fromJson(Map<String, dynamic> json) =>
       RestaurantResult(
         error: json["error"],
         message: json["message"],
         count: json["count"],
-        restaurants: List<Restaurant>.from(
-            json["restaurants"].map((x) => Restaurant.fromJson(x))),
+        restaurants: List<Restaurantlist>.from(
+            json["restaurants"].map((x) => Restaurantlist.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -36,8 +36,8 @@ class RestaurantResult {
       };
 }
 
-class Restaurant {
-  Restaurant({
+class Restaurantlist {
+  Restaurantlist({
     required this.id,
     required this.name,
     required this.description,
@@ -53,13 +53,13 @@ class Restaurant {
   String city;
   double rating;
 
-  factory Restaurant.fromJson(Map<String, dynamic> json) => Restaurant(
+  factory Restaurantlist.fromJson(Map<String, dynamic> json) => Restaurantlist(
         id: json["id"],
         name: json["name"],
         description: json["description"],
         pictureId: json["pictureId"],
         city: json["city"],
-        rating: json["rating"].toDouble(),
+        rating: double.parse(json["rating"].toString()),
       );
 
   Map<String, dynamic> toJson() => {

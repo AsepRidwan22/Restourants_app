@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:restouran_app/data/api/service_api.dart';
 import 'package:restouran_app/data/model/restaurant_search.dart';
 import 'package:flutter/material.dart';
-import 'package:restouran_app/cummon/constant.dart';
+
+enum SearchResultState { loading, noData, hasData, error }
 
 class SearchRestaurantProvider extends ChangeNotifier {
   final ApiService apiService;
@@ -12,8 +13,8 @@ class SearchRestaurantProvider extends ChangeNotifier {
     fetchAllRestaurant(search);
   }
 
-  SearchRestaurantResult? _restaurantResult;
-  ResultState? _state;
+  late SearchRestaurantResult? _restaurantResult;
+  late SearchResultState? _state;
   String _message = '';
   String _search = '';
 
@@ -23,21 +24,21 @@ class SearchRestaurantProvider extends ChangeNotifier {
 
   String get search => _search;
 
-  ResultState? get state => _state;
+  SearchResultState? get state => _state;
 
   Future<dynamic> fetchAllRestaurant(String search) async {
     try {
       if (search.isNotEmpty) {
-        _state = ResultState.loading;
+        _state = SearchResultState.loading;
         _search = search;
         notifyListeners();
         final restaurant = await apiService.getTextField(search);
         if (restaurant.restaurants.isEmpty) {
-          _state = ResultState.noData;
+          _state = SearchResultState.noData;
           notifyListeners();
           return _message = 'Empty Data Boss!';
         } else {
-          _state = ResultState.hasData;
+          _state = SearchResultState.hasData;
           notifyListeners();
           return _restaurantResult = restaurant;
         }
@@ -45,12 +46,11 @@ class SearchRestaurantProvider extends ChangeNotifier {
         return _message = 'text null';
       }
     } on SocketException {
-      _state = ResultState.error;
+      _state = SearchResultState.error;
       notifyListeners();
-      return _message =
-          "Terjadi kesalahan saat menghubungkan, silahkan cek koneksi anda";
+      return _message = "non connection";
     } catch (e) {
-      _state = ResultState.error;
+      _state = SearchResultState.error;
       notifyListeners();
       return _message = 'Error --> $e';
     }

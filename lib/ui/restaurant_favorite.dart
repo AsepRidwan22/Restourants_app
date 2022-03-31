@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restouran_app/data/model/restaurant_list.dart';
-import 'package:restouran_app/provider/restaurant_list.dart';
-import 'package:restouran_app/ui/restaurant_detail_page.dart';
+import 'package:restouran_app/provider/restaurant_database.dart';
 import 'package:restouran_app/cummon/constant.dart';
+import 'package:restouran_app/ui/restaurant_detail_page.dart';
 import 'package:restouran_app/cummon/style.dart';
 
-class RestaurantListPage extends StatelessWidget {
-  static const routeName = '/restauran_list';
-  const RestaurantListPage({Key? key}) : super(key: key);
+class RestaurantFavoritePage extends StatelessWidget {
+  const RestaurantFavoritePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<RestaurantProvider>(
+    return Consumer<DatabaseProvider>(
       builder: (context, state, _) {
         if (state.state == ResultState.loading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state.state == ResultState.hasData) {
           return ListView.builder(
             shrinkWrap: true,
-            itemCount: state.result.restaurants.length,
+            itemCount: state.favorites.length,
             itemBuilder: (context, index) {
-              var restaurant = state.result.restaurants[index];
+              var restaurant = state.favorites[index];
               return buildRestaurantItem(context, restaurant);
             },
           );
@@ -50,7 +49,6 @@ Widget buildRestaurantItem(BuildContext context, Restaurantlist restaurant) {
     child: Stack(
       children: <Widget>[
         Container(
-          //mohon maaf tidak mengunakan sizebox seperti yang di sarankan di submission sebelumnya karena sizebox tidak bisa pake margin
           margin: const EdgeInsets.only(left: 40, top: 5, right: 20, bottom: 5),
           height: 170.0,
           width: double.infinity,
