@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:restouran_app/ui/restaurant_favorite.dart';
 import 'package:restouran_app/ui/restaurant_list_page.dart';
 import 'package:restouran_app/ui/restaurant_search_page.dart';
+import 'package:restouran_app/ui/restaurant_setting_page.dart';
 
 class RestaurantHomePage extends StatefulWidget {
   const RestaurantHomePage({Key? key}) : super(key: key);
@@ -18,12 +19,7 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
     const RestaurantListPage(),
     const RestaurantSearchPage(),
     const RestaurantFavoritePage(),
-    const Center(
-      child: Text(
-        'Profil',
-        style: optionStyle,
-      ),
-    ),
+    const RestaurantSettingPage()
   ];
 
   void _onItemTapped(int index) {

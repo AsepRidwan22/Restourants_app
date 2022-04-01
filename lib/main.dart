@@ -1,13 +1,29 @@
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
+import 'package:restouran_app/cummon/navigation.dart';
 import 'package:restouran_app/data/api/service_api.dart';
 import 'package:restouran_app/data/db/database_helper.dart';
 import 'package:restouran_app/provider/restaurant_database.dart';
 import 'package:restouran_app/provider/restaurant_list.dart';
 import 'package:restouran_app/provider/restaurant_search.dart';
+import 'package:restouran_app/provider/scheduling_provider.dart';
 import 'package:restouran_app/widget/splash_screen.dart';
+import 'package:restouran_app/notification/notification_helper.dart';
+import 'package:restouran_app/notification/background_service.dart';
 
-void main() {
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final NotificationHelper _notificationHelper = NotificationHelper();
+  final BackgroundService _service = BackgroundService();
+  _service.initializeIsolate();
+  await AndroidAlarmManager.initialize();
+  await _notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
+
   runApp(const MyApp());
 }
 
@@ -23,9 +39,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (_) => RestaurantProvider(apiService: ApiService())),
         ChangeNotifierProvider(
-            create: (_) => SearchRestaurantProvider(apiService: ApiService()))
+            create: (_) => SearchRestaurantProvider(apiService: ApiService())),
+        ChangeNotifierProvider(create: (_) => SchedulingProvider())
       ],
       child: MaterialApp(
+        navigatorKey: navigatorKey,
         title: 'Restaurant',
         theme: ThemeData(
             primarySwatch: Colors.blue,
