@@ -29,5 +29,3 @@ final TextTheme myTextTheme = TextTheme(
   overline: GoogleFonts.libreFranklin(
       fontSize: 10, fontWeight: FontWeight.w400, letterSpacing: 1.5),
 );
-
-enum DetailResultState { loading, error, noData, hasData }

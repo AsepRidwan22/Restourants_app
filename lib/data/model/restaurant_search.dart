@@ -3,8 +3,7 @@
 //     final SearchRestaurantResult = SearchRestaurantResultFromJson(jsonString);
 
 import 'dart:convert';
-
-import 'package:restouran_app/ui/restaurant_search_page.dart';
+import 'package:restouran_app/data/model/restaurant_list.dart';
 
 SearchRestaurantResult searchRestaurantResultFromJson(String str) =>
     SearchRestaurantResult.fromJson(json.decode(str));
@@ -21,14 +20,14 @@ class SearchRestaurantResult {
 
   bool error;
   int founded;
-  List<RestaurantSearch> restaurants;
+  List<Restaurantlist> restaurants;
 
   factory SearchRestaurantResult.fromJson(Map<String, dynamic> json) =>
       SearchRestaurantResult(
         error: json["error"],
         founded: json["founded"],
-        restaurants: List<RestaurantSearch>.from(
-            json["restaurants"].map((x) => RestaurantSearch.fromJson(x))),
+        restaurants: List<Restaurantlist>.from(
+            json["restaurants"].map((x) => Restaurantlist.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {

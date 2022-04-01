@@ -2,7 +2,6 @@ import 'package:restouran_app/data/db/database_helper.dart';
 import 'package:restouran_app/cummon/constant.dart';
 import 'package:flutter/foundation.dart';
 import 'package:restouran_app/data/model/restaurant_list.dart';
-import 'package:restouran_app/data/model/restaurant_search.dart';
 
 class DatabaseProvider extends ChangeNotifier {
   final DatabaseHelper databaseHelper;
@@ -26,7 +25,7 @@ class DatabaseProvider extends ChangeNotifier {
       _state = ResultState.hasData;
     } else {
       _state = ResultState.noData;
-      _message = 'Empty Data';
+      _message = Constants.textEmptyData;
     }
     notifyListeners();
   }

@@ -30,7 +30,7 @@ class DetailRestaurantProvider extends ChangeNotifier {
       if (detailRestaurant.error) {
         _state = ResultState.noData;
         notifyListeners();
-        return _message = 'Empty Data';
+        return _message = Constants.textEmptyData;
       } else {
         _state = ResultState.hasData;
         notifyListeners();
@@ -39,8 +39,7 @@ class DetailRestaurantProvider extends ChangeNotifier {
     } on SocketException {
       _state = ResultState.error;
       notifyListeners();
-      return _message =
-          "Terjadi kesalahan saat menghubungkan, silahkan cek koneksi anda!!";
+      return _message = Constants.textConnectionError;
     } catch (e) {
       _state = ResultState.error;
       notifyListeners();

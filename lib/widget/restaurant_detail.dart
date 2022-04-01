@@ -32,15 +32,6 @@ class RestaurantDetail extends StatelessWidget {
                               restaurant.pictureId,
                         ),
                       ),
-                      isFavourited == true
-                          ? IconButton(
-                              onPressed: () =>
-                                  provider.removeFavorite(restaurantlist.id),
-                              icon: const Icon(Icons.favorite))
-                          : IconButton(
-                              onPressed: () =>
-                                  provider.addFavorite(restaurantlist),
-                              icon: const Icon(Icons.favorite_border_outlined)),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -80,15 +71,37 @@ class RestaurantDetail extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                Row(
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    _icon(Icons.star_rate, 20, Colors.yellow),
-                                    Text(
-                                      ' ${restaurant.rating}',
-                                      style: myTextTheme.headline6,
+                                    isFavourited == true
+                                        ? IconButton(
+                                            onPressed: () =>
+                                                provider.removeFavorite(
+                                                    restaurantlist.id),
+                                            icon: const Icon(
+                                              Icons.favorite,
+                                              color: Colors.red,
+                                            ))
+                                        : IconButton(
+                                            onPressed: () => provider
+                                                .addFavorite(restaurantlist),
+                                            icon: const Icon(
+                                              Icons.favorite_border_outlined,
+                                              color: Colors.red,
+                                            )),
+                                    Row(
+                                      children: [
+                                        _icon(
+                                            Icons.star_rate, 20, Colors.yellow),
+                                        Text(
+                                          ' ${restaurant.rating}',
+                                          style: myTextTheme.bodyText1,
+                                        ),
+                                      ],
                                     ),
                                   ],
-                                )
+                                ),
                               ],
                             ),
                           ),

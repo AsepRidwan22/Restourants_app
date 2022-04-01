@@ -8,11 +8,9 @@ import 'package:restouran_app/cummon/constant.dart';
 
 class RestaurantDetailPage extends StatelessWidget {
   static const routeName = '/restauran_detail';
-  final String idResto;
-  final Restaurantlist? restaurantlist;
+  final Restaurantlist restaurantlist;
 
-  const RestaurantDetailPage(
-      {Key? key, required this.idResto, this.restaurantlist})
+  const RestaurantDetailPage({Key? key, required this.restaurantlist})
       : super(key: key);
 
   @override
@@ -28,8 +26,8 @@ class RestaurantDetailPage extends StatelessWidget {
       ),
       backgroundColor: Colors.grey.shade100,
       body: ChangeNotifierProvider<DetailRestaurantProvider>(
-        create: (_) =>
-            DetailRestaurantProvider(apiService: ApiService(), id: idResto),
+        create: (_) => DetailRestaurantProvider(
+            apiService: ApiService(), id: restaurantlist.id),
         child: Consumer<DetailRestaurantProvider>(
           builder: (context, state, _) {
             if (state.state == ResultState.loading) {
@@ -37,7 +35,7 @@ class RestaurantDetailPage extends StatelessWidget {
             } else if (state.state == ResultState.hasData) {
               return RestaurantDetail(
                 restaurant: state.result.restaurants,
-                restaurantlist: restaurantlist!,
+                restaurantlist: restaurantlist,
               );
             } else if (state.state == ResultState.noData) {
               return Center(child: Text(state.message));

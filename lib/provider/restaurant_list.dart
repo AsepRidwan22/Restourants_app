@@ -31,7 +31,7 @@ class RestaurantProvider extends ChangeNotifier {
       if (restaurant.restaurants.isEmpty) {
         _state = ResultState.noData;
         notifyListeners();
-        return _message = 'Empty Data';
+        return _message = Constants.textEmptyData;
       } else {
         _state = ResultState.hasData;
         notifyListeners();
@@ -40,8 +40,7 @@ class RestaurantProvider extends ChangeNotifier {
     } on SocketException {
       _state = ResultState.error;
       notifyListeners();
-      return _message =
-          "terjadi kesalahan saat menghubungkan, silahkan cek koneksi anda";
+      return _message = Constants.textConnectionError;
     } catch (e) {
       _state = ResultState.error;
       notifyListeners();
