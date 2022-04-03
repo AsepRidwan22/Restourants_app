@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:restouran_app/notification/notification_helper.dart';
+import 'package:restouran_app/ui/restaurant_detail_page.dart';
+import 'package:restouran_app/ui/restaurant_favorite.dart';
 import 'package:restouran_app/ui/restaurant_list_page.dart';
 import 'package:restouran_app/ui/restaurant_search_page.dart';
+import 'package:restouran_app/ui/restaurant_setting_page.dart';
 
 class RestaurantHomePage extends StatefulWidget {
+  static const routeName = '/home';
   const RestaurantHomePage({Key? key}) : super(key: key);
 
   @override
@@ -11,29 +16,27 @@ class RestaurantHomePage extends StatefulWidget {
 
 class _RestaurantHomePageState extends State<RestaurantHomePage> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   final List<Widget> _widgetOptions = <Widget>[
     const RestaurantListPage(),
     const RestaurantSearchPage(),
-    const Center(
-      child: Text(
-        'Profil',
-        style: optionStyle,
-      ),
-    ),
-    const Center(
-      child: Text(
-        'Profil',
-        style: optionStyle,
-      ),
-    ),
+    const RestaurantFavoritePage(),
+    const RestaurantSettingPage()
   ];
 
+  final NotificationHelper _notificationHelper = NotificationHelper();
+
+  @override
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _notificationHelper
+        .configureSelectNotificationSubject(RestaurantDetailPage.routeName);
   }
 
   @override
@@ -46,6 +49,7 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
           "Restaurant App",
           style: TextStyle(color: Colors.black),
         ),
+        automaticallyImplyLeading: false,
       ),
       backgroundColor: Colors.grey.shade100,
       body: _widgetOptions.elementAt(_selectedIndex),

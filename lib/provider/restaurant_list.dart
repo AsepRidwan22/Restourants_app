@@ -4,8 +4,7 @@ import 'dart:io';
 import 'package:restouran_app/data/api/service_api.dart';
 import 'package:restouran_app/data/model/restaurant_list.dart';
 import 'package:flutter/material.dart';
-
-enum ResultState { loading, noData, hasData, error }
+import 'package:restouran_app/cummon/constant.dart';
 
 class RestaurantProvider extends ChangeNotifier {
   final ApiService apiService;
@@ -32,7 +31,7 @@ class RestaurantProvider extends ChangeNotifier {
       if (restaurant.restaurants.isEmpty) {
         _state = ResultState.noData;
         notifyListeners();
-        return _message = 'Empty Data';
+        return _message = Constants.textEmptyData;
       } else {
         _state = ResultState.hasData;
         notifyListeners();
@@ -41,7 +40,7 @@ class RestaurantProvider extends ChangeNotifier {
     } on SocketException {
       _state = ResultState.error;
       notifyListeners();
-      return _message = "non connection";
+      return _message = Constants.textConnectionError;
     } catch (e) {
       _state = ResultState.error;
       notifyListeners();

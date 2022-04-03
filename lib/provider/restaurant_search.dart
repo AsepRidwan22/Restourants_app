@@ -1,20 +1,21 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:restouran_app/data/api/search_service_api.dart';
+import 'package:restouran_app/cummon/constant.dart';
+import 'package:restouran_app/data/api/service_api.dart';
 import 'package:restouran_app/data/model/restaurant_search.dart';
 import 'package:flutter/material.dart';
 
 enum SearchResultState { loading, noData, hasData, error }
 
 class SearchRestaurantProvider extends ChangeNotifier {
-  final SearchApiService apiService;
+  final ApiService apiService;
 
   SearchRestaurantProvider({required this.apiService}) {
     fetchAllRestaurant(search);
   }
 
-  SearchRestaurantResult? _restaurantResult;
-  SearchResultState? _state;
+  late SearchRestaurantResult? _restaurantResult;
+  late SearchResultState? _state;
   String _message = '';
   String _search = '';
 
@@ -36,7 +37,7 @@ class SearchRestaurantProvider extends ChangeNotifier {
         if (restaurant.restaurants.isEmpty) {
           _state = SearchResultState.noData;
           notifyListeners();
-          return _message = 'Empty Data Boss!';
+          return _message = Constants.textEmptyData;
         } else {
           _state = SearchResultState.hasData;
           notifyListeners();
@@ -48,7 +49,7 @@ class SearchRestaurantProvider extends ChangeNotifier {
     } on SocketException {
       _state = SearchResultState.error;
       notifyListeners();
-      return _message = "non connection";
+      return _message = Constants.textConnectionError;
     } catch (e) {
       _state = SearchResultState.error;
       notifyListeners();

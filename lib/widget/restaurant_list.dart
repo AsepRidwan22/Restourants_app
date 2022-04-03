@@ -3,23 +3,25 @@ import 'package:restouran_app/data/model/restaurant_list.dart';
 import 'package:restouran_app/cummon/style.dart';
 import 'package:restouran_app/ui/restaurant_detail_page.dart';
 
-class CardRestaurant extends StatelessWidget {
-  final Restaurant restaurant;
+class RestaurantCardList extends StatelessWidget {
+  final Restaurantlist restaurant;
 
-  const CardRestaurant({Key? key, required this.restaurant}) : super(key: key);
+  const RestaurantCardList({Key? key, required this.restaurant})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return RestaurantDetailPage(idResto: restaurant.id);
+          return RestaurantDetailPage(
+            restaurantlist: restaurant,
+          );
         }));
       },
       child: Stack(
         children: <Widget>[
           Container(
-            //mohon maaf tidak mengunakan sizebox seperti yang di sarankan di submission sebelumnya karena sizebox tidak bisa pake margin
             margin:
                 const EdgeInsets.only(left: 40, top: 5, right: 20, bottom: 5),
             height: 170.0,
