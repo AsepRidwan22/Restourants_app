@@ -1,20 +1,36 @@
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:restouran_app/cummon/preferences_helper.dart';
 import 'package:restouran_app/notification/background_service.dart';
 import 'package:restouran_app/notification/setting_date.dart';
 
 class SchedulingProvider extends ChangeNotifier {
-  bool _isScheduled = false;
+  PreferencesHelper preferencesHelper;
+  SchedulingProvider({required this.preferencesHelper}) {
+    _getDailyRestaurantPreference();
+  }
 
+  bool _isScheduled = true;
   bool get isScheduled => _isScheduled;
 
-  Future<bool> scheduledNews(bool value) async {
+  void _getDailyRestaurantPreference() async {
+    _isScheduled = await preferencesHelper.isDailyRestaurantActive;
+    notifyListeners();
+  }
+
+  void enableDailyRestaurant(bool value) {
+    preferencesHelper.setDailyRestaurant(value);
+    scheduledRestaurant(value);
+    _getDailyRestaurantPreference();
+  }
+
+  Future<bool> scheduledRestaurant(bool value) async {
     _isScheduled = value;
     if (_isScheduled) {
-      print('Scheduling News Activated');
+      debugPrint('Scheduling Restaurant Activated');
       notifyListeners();
       return await AndroidAlarmManager.periodic(
-        Duration(hours: 24),
+        const Duration(hours: 24),
         1,
         BackgroundService.callback,
         startAt: DateTimeHelper.format(),
@@ -22,7 +38,7 @@ class SchedulingProvider extends ChangeNotifier {
         wakeup: true,
       );
     } else {
-      print('Scheduling News Canceled');
+      debugPrint('Scheduling Restaurant Canceled');
       notifyListeners();
       return await AndroidAlarmManager.cancel(1);
     }

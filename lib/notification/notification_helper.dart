@@ -39,68 +39,46 @@ class NotificationHelper {
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: (String? payload) async {
       if (payload != null) {
-        print('notification payload: ' + payload);
+        print('notification payload: $payload');
       }
       selectNotificationSubject.add(payload ?? 'empty payload');
     });
   }
 
-  Future<String> _downloadAndSaveFile(String url, String fileName) async {
-    var directory = await getApplicationDocumentsDirectory();
-    var filePath = '${directory.path}/$fileName';
-    var response = await http.get(Uri.parse(url));
-    var file = File(filePath);
-    await file.writeAsBytes(response.bodyBytes);
-    return filePath;
-  }
-
   Future<void> showNotification(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
-      RestaurantResult restaurantlist) async {
+      RestaurantResult restaurantResult) async {
     var _channelId = "1";
     var _channelName = "channel_01";
-    var _channelDescription = "asep ridwan";
-    var bigPicturePath = await _downloadAndSaveFile(
-        'https://restaurant-api.dicoding.dev/images/medium/${restaurantlist.restaurants[0].pictureId}',
-        'bigPicture');
-    var bigPictureStyleInformation = BigPictureStyleInformation(
-      FilePathAndroidBitmap(bigPicturePath),
-      largeIcon: FilePathAndroidBitmap(bigPicturePath),
-      contentTitle: restaurantlist.restaurants[0].name,
-      htmlFormatContentTitle: true,
-      summaryText:
-          "Restoran di ${restaurantlist.restaurants[0].city} dengan rating ${restaurantlist.restaurants[0].rating}",
-      htmlFormatSummaryText: true,
-    );
+    var _channelDescription = "dicoding news channel";
+    var random = restaurantResult
+        .restaurants[Random().nextInt(restaurantResult.restaurants.length - 1)];
 
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         _channelId, _channelName,
-        channelDescription: _channelDescription,
         importance: Importance.max,
         priority: Priority.high,
         ticker: 'ticker',
-        styleInformation: bigPictureStyleInformation);
+        styleInformation: DefaultStyleInformation(true, true));
 
     var iOSPlatformChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
         android: androidPlatformChannelSpecifics,
         iOS: iOSPlatformChannelSpecifics);
 
-    var titleNotification = restaurantlist.restaurants[0].name;
-    var titleNews = restaurantlist.restaurants[0].description;
-
+    var titleNotification = random.name;
+    var titleNews = random.description;
     await flutterLocalNotificationsPlugin.show(
         0, titleNotification, titleNews, platformChannelSpecifics,
-        payload: json.encode(restaurantlist.toJson()));
+        payload: json.encode(restaurantResult.toJson()));
   }
 
   void configureSelectNotificationSubject(String route) {
     selectNotificationSubject.stream.listen(
       (String payload) async {
         var data = RestaurantResult.fromJson(json.decode(payload));
-        var restaurant = data.restaurants[0];
-        var restaurantId = data.restaurants[0].id;
-        Navigation.intentWithData(restaurantId, restaurant);
+        var resto = data.restaurants[0];
+        Navigation.intentWithData(route, resto);
       },
     );
   }

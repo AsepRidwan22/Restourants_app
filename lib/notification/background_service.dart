@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'dart:isolate';
+import 'package:flutter/cupertino.dart';
 import 'package:restouran_app/main.dart';
 import 'package:restouran_app/data/api/service_api.dart';
 import 'package:restouran_app/notification/notification_helper.dart';
@@ -8,7 +9,7 @@ final ReceivePort port = ReceivePort();
 
 class BackgroundService {
   static BackgroundService? _instance;
-  static String _isolateName = 'isolate';
+  static const String _isolateName = 'isolate';
   static SendPort? _uiSendPort;
 
   BackgroundService._internal() {
@@ -25,7 +26,7 @@ class BackgroundService {
   }
 
   static Future<void> callback() async {
-    print('Alarm fired!');
+    debugPrint('Alarm fired!');
     final NotificationHelper _notificationHelper = NotificationHelper();
     var result = await ApiService().topHeadlines();
     await _notificationHelper.showNotification(
