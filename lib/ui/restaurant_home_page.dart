@@ -72,9 +72,8 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
       items: const [
         BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home)),
         BottomNavigationBarItem(label: 'Search', icon: Icon(Icons.search)),
-        BottomNavigationBarItem(label: 'Favorite', icon: Icon(Icons.settings)),
-        BottomNavigationBarItem(
-            label: 'Profil', icon: Icon(Icons.account_circle))
+        BottomNavigationBarItem(label: 'Favorite', icon: Icon(Icons.favorite)),
+        BottomNavigationBarItem(label: 'Setting', icon: Icon(Icons.settings))
       ],
       onTap: (index) {
         _onItemTapped(index);
